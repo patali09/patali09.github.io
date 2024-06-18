@@ -10,7 +10,7 @@ order: 4
 **Kathmandu, Nepal**
 
 ### PROFESSIONAL SUMMARY
-Woked as a offensive security analyst for around 7 months. 
+Worked as an Offensive Security Analyst for around 7 months, specializing in web and mobile application vulnerability assessment. Experienced in conducting pentest, writing technical reports, and collaborating with clients.
 
 ### SKILLS
 - Web and Mobile Application VA and Exploitation
