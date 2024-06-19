@@ -1,6 +1,5 @@
 ---
 title: Topology | HTB Walkthrough
-author: Niraj Neupane
 date: 2023-11-05 14:10:00 +0800
 categories: [HackTheBox]
 tags: [HTB, HackTheBox]
