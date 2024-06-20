@@ -1,6 +1,6 @@
 ---
 title: Analytics | HTB Walkthrough
-date: 2023-11-05 14:10:00 +0800
+date: 2023-11-01 14:10:00 +0800
 categories: [HackTheBox]
 tags: [HTB, HackTheBox]
 ---
