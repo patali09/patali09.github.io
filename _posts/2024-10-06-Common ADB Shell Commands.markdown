@@ -33,7 +33,7 @@ adb shell pm path <packagename>
 
 - **Purpose:** It gives the path of apk for the packages installed in a system. So we can use that to pull to host machine for static analsyis.
 
-## package info
+## Package Info
 
 ```bash
 adb shell pm dump <package_name>
@@ -41,7 +41,7 @@ adb shell pm dump <package_name>
 
 - **Purpose:** Provides detailed information about a specific package, including permissions, activities, services, and more.
 
-## install
+## Install APK
 
 ```bash
 adb shell pm install /path/to/app.apk
@@ -49,7 +49,7 @@ adb shell pm install /path/to/app.apk
 
 - **Purpose:** Installs an APK file on the device. You can replace an existing app with the `r` flag
 
-## install APK with permissions
+## Install APK with Permissions
 
 ```bash
 adb install -g /path/to/app.apk
@@ -57,7 +57,7 @@ adb install -g /path/to/app.apk
 
 - **Purpose:** Installs an APK and grants all runtime permissions specified in the manifest automatically.
 
-## uninstall
+## Uninstall APK
 
 ```bash
 adb shell pm uninstall <package_name>
@@ -65,7 +65,7 @@ adb shell pm uninstall <package_name>
 
 - **Purpose:** Uninstalls the specified application from the device.
 
-## clear
+## Clear package data
 
 ```bash
 adb shell pm clear <package_name>
@@ -73,7 +73,7 @@ adb shell pm clear <package_name>
 
 - **Purpose:** Clears all data associated with the specified application, effectively resetting it to its initial state.
 
-## enable
+## Enable package 
 
 ```bash
 adb shell pm enable <package_name>
@@ -81,7 +81,7 @@ adb shell pm enable <package_name>
 
 - **Purpose:** Enables a previously disabled application, allowing it to run again.
 
-## disable
+## Disable package
 
 ```bash
 adb shell pm disable-user <package_name>
@@ -89,7 +89,7 @@ adb shell pm disable-user <package_name>
 
 - **Purpose:** Disables a package, preventing it from running and removing it from the launcher.
 
-## check install
+## Check if Package is Installed  or not
 
 ```bash
 adb shell pm path <package_name>
@@ -97,7 +97,7 @@ adb shell pm path <package_name>
 
 - **Purpose:** Displays the path to the APK file of the specified package if it is installed; otherwise, it returns an error.
 
-## grant permission
+## Grant Permission
 
 ```bash
 adb shell pm grant <package_name> <permission>
@@ -105,7 +105,7 @@ adb shell pm grant <package_name> <permission>
 
 - **Purpose:** Grants a specific permission to the application, useful for testing.
 
-## revoke permission
+## Revoke Permission
 
 ```bash
 adb shell pm revoke <package_name> <permission>
@@ -113,7 +113,7 @@ adb shell pm revoke <package_name> <permission>
 
 - **Purpose:** Revokes a specific permission from the application.
 
-## list permissions
+## List Permissions
 
 ```bash
 adb shell pm list permissions
@@ -121,7 +121,7 @@ adb shell pm list permissions
 
 - **Purpose:** Lists all permissions available in the Android system.
 
-## force stop
+## Force Stop
 
 ```bash
 adb shell pm force-stop <package_name>
@@ -129,7 +129,7 @@ adb shell pm force-stop <package_name>
 
 - **Purpose:** Forces the specified application to stop, which can be useful for troubleshooting.
 
-## list permissions for a package
+## List Permissions for a Package
 
 ```bash
 adb shell pm list packages -f
@@ -137,7 +137,7 @@ adb shell pm list packages -f
 
 - **Purpose:** Lists all the permissions that the specified package has requested.
 
-## find apps with specific permission
+## Find Apps with Specific Permission
 
 ```bash
 adb shell pm list packages -g <permission>
@@ -153,7 +153,9 @@ vbox86p:/ pm path packagename
 $ adb pull outputofabovecommand_excluding_package
 ```
 
-#
+<br />
+<br /><br /><br /><br /><br />
+
 # For Activity Management
 
 ## Start specific activity of an application
@@ -201,7 +203,7 @@ exta float    --ef              --efa
 exra bolllean --ez #in value it takes true and false
 ```
 
-## start service
+## Start Service
 
 ```bash
 adb shell am startservice -n <package_name>/<service_name>
@@ -215,7 +217,7 @@ adb shell am startservice -n <package_name>/<service_name>
     ```
     
 
-## stop service
+## Stop Service
 
 ```bash
 adb shell am stopservice -n <package_name>/<service_name>
@@ -229,7 +231,7 @@ adb shell am stopservice -n <package_name>/<service_name>
     ```
     
 
-## broadcast
+## Broadcast
 
 ```bash
 adb shell am broadcast -a <action>
@@ -243,7 +245,7 @@ adb shell am broadcast -a <action>
     ```
     
 
-## get tasks
+## Get Tasks
 
 ```bash
 adb shell am get-tasks
@@ -252,8 +254,7 @@ adb shell am get-tasks
 - **Purpose:** Lists the current tasks and their states, providing insights into the app's activity stack.
 
 
-#
-#
+<br /><br /><br /><br />
 # For System Level Interaction
 
 ## Dumpsys
@@ -311,18 +312,20 @@ adb shell dumpsys
     - **Command:** `adb shell dumpsys media_session`
     - **Purpose:** Provides information about media sessions and their states.
 
-13. **Power Management**
+14. **Power Management**
 
-- **Command:** `adb shell dumpsys power`
-- **Purpose:** Displays information about the power management state of the device.
+    - **Command:** `adb shell dumpsys power`
+    - **Purpose:** Displays information about the power management state of the device.
 
 15. **Performance Stats**
 
-- **Command:** `adb shell dumpsys perf`
-- **Purpose:** Provides performance metrics and stats for various system components.
-1. **Input** **Devices**
+    - **Command:** `adb shell dumpsys perf`
+    - **Purpose:** Provides performance metrics and stats for various system components.
+16. **Input** **Devices**
     - **Command**: `adb shell dumpsys input`
     - **Purpose:** Provides information about input devices and their current state.
+
+<br />
 
 ## getprop
 
@@ -336,7 +339,6 @@ adb shell getprop
     ```bash
     adb shell getprop ro.product.model
     ```
-    
 
 ## ps
 
@@ -369,6 +371,9 @@ adb shell strace -p <PID>
 ```
 
 - **Purpose:** Traces system calls and signals for a specific process, providing insights into its operations and interactions with the kernel.
+
+<br />
+<br /><br /><br />
 
 # For settings
 
