@@ -1,6 +1,6 @@
 ---
 title: Common ADB Shell Commands
-date: 2024-09-06 14:10:00 +0800
+date: 2024-10-06 14:10:00 +0800
 categories: [Android App Security]
 tags: [Android, App Security, ADB, Android App Security]
 ---
