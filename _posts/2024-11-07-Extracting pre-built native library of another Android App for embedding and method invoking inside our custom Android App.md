@@ -1,10 +1,9 @@
 ---
-title: Common ADB Shell Commands
+title: Extracting pre-built native library of another Android App for embedding and method invoking inside our custom Android App
 date: 2024-11-07 02:00:00 +0545
 categories: [Android App Security]
 tags: [Android, App Security, Reverse Engineering, Android App Security]
 ---
-# Extracting pre-built native library of another Android App for embedding and method invoking inside our custom Android App
 
 During reverse engineering android app we might find native libraries. Sometimes we might need to invoke the methods of those library to analyse its behavior. But we cannot call those methods just with library file. We need to build our own custom android app, embed that library to our app, then call the function with our custom input. 
 
