@@ -324,9 +324,7 @@ adb shell dumpsys
 16. **Input** **Devices**
     - **Command**: `adb shell dumpsys input`
     - **Purpose:** Provides information about input devices and their current state.
-
-<br />
-
+    
 ## getprop
 
 ```bash
