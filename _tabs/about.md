@@ -73,6 +73,9 @@ School Leaving Certificate (SLC)
 - ACES Techfest 5.0 - CTF, Purbanchal Campus (IOE) - `13 Jan (2023)`<br>
 
 ### PROJECT INVOLVEMENT
+**[TypeMobo - Typing Speed Test, Practice](https://play.google.com/store/apps/details?id=com.aaratiniraj.typemobo)**<br>
+- Mobile App for improving typing on mobile devices
+
 **[pDork - Google Dorking Tool](https://github.com/patali09/pDork)**<br>
 - Semi Automated Google Dorking Tool for Security Testing
 
