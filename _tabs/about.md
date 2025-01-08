@@ -54,10 +54,16 @@ School Leaving Certificate (SLC)
 - Gajabaar Infosecurity Mentorship Program - Certificate ID: GB2022001 <br>
 - National Cyber League (NCL) Spring 2022 
 
+### EVENT
+**Speaker at Gandaki University Internation Conference-2025**<br>
+- Talked about web attack detection and classification using LSTM
 
 ### ACHIEVEMENTS
 - NESS Maths Quiz 2078  - Runner-up <br>
 - SudoOverride CTF 2023 - Runner-up <br>
+
+### RESEARCH
+- Web Attack Detection and Classification Using LSTM
 
 ### ECA PARTICIPATIONS
 
@@ -76,4 +82,3 @@ School Leaving Certificate (SLC)
 **[Tokma - Digital Solution for Tourism](https://github.com/patali09/Tokma)**
 - Mobile app aims to assist tourist in their travel
 
-### RESEARCH
