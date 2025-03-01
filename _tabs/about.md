@@ -57,7 +57,6 @@ School Leaving Certificate (SLC)
 
 ### EVENT
 **Speaker at Gandaki University Internation Conference-2025**<br>
-- RSA-Based Secure Communication Over HTTPS
 - Talked about web attack detection and classification using LSTM
 
 ### ACHIEVEMENTS
@@ -65,6 +64,7 @@ School Leaving Certificate (SLC)
 - SudoOverride CTF 2023 - Runner-up <br>
 
 ### RESEARCH
+- RSA-Based Secure Communication Over HTTPS
 - Web Attack Detection and Classification Using LSTM
 
 ### ECA PARTICIPATIONS
