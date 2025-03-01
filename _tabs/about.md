@@ -51,6 +51,7 @@ School Leaving Certificate (SLC)
 
 ### CERTIFICATION
 - Certified AppSec Practitioner (CAP) - Certificate ID: 7021413 <br>
+- Certified Network Security Practitioner (CNSP) -  Certificate ID: 9721197 <br>
 - Gajabaar Infosecurity Mentorship Program - Certificate ID: GB2022001 <br>
 - National Cyber League (NCL) Spring 2022 
 
