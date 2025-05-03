@@ -4,86 +4,91 @@ icon: fas fa-info-circle
 order: 4
 ---
 
-# Niraj Neupane | Mobile And Web App Pentester
+# Niraj Neupane | Mobile, Web Security Researcher
 
-**contact@neupaneniraj.com.np** <br>
+**contact@neupaneniraj.com.np**  
 **Kathmandu, Nepal**
 
 ### PROFESSIONAL SUMMARY
-Worked as an Offensive Security Analyst for around 7 months, specializing in web and mobile application vulnerability assessment. Experienced in conducting pentest, writing technical reports, and collaborating with clients.
+Enthusiastic Computer Engineering graduate (March 2025) with a passion for Mobile, Web Security Research and academic excellence. Experienced in web/mobile application security assessments. Secured a competitive. Experienced in conducting pentest, writing technical reports, and collaborating with clients.
+
 
 ### SKILLS
 - Web and Mobile Application VA and Exploitation
-- Mobile application (SAST and DAST)
+- Mobile application (SAST and DAST) 
 - Reverse Engineering (Android and iOS application)
 - Run Time application manipulations with Frida, Objections
-- Intermediate C++, Python and  Javascript
-- Presentations
+- Intermediate C++, Python and Javascript
+- Technical Report Writing & Presentations  
 
 ### WORK EXPERIENCE
-**Offensive Security Analyst, Cryptogen Nepal Pvt. Ltd – Kathmandu, Bagmati** `05/2023 - 12/2023`
-- Conducted comprehensive vulnerability assesement and penentration
-testing on mobile and web application
+**Offensive Security Analyst, Cryptogen Nepal Pvt. Ltd - Kathmandu, Bagmati**  
+`05/2023 - 12/2023`  
+- Conducted comprehensive vulnerability assesement and penentration testing on mobile and web application
 - Write technical and executive reports
-- Validate security improvements with additional
-testing
+- Validate security improvements with additional testing
 - Developed and delivered customized security report
-- Collaborated with clients' technical team
-
-### VOLUNTEER (WORK) EXPERIENCE
-**Committee Member, Innovative Computer Engineering Students' Society (ICES)-`01/2022 - 01/2024`**
+- Collaborated with clients’ technical team
+### VOLUNTEER EXPERIENCE
+**Committee Member, Innovative Computer Engineering Students’ Society (ICES)**  
+`01/2022 - 01/2024`  
 - Leadership
 - Cyber Security Trainer
-- Cyber Security Event Organize
-- CTF Event Organize
-- Event Management
+- Organize Cyber Security Event 
+- Organize CTF Event 
+- Event Management 
 
 ### EDUCATION
-**Paschimanchal Campus (IOE) | Tribhuvan University  – Pokhara `03/2025`**<br>	
-Bachelor: Computer Engineering
+**Paschimanchal Campus (IOE) | Tribhuvan University - Pokhara**  
+_Bachelor of Computer Engineering_ `03/2025`  
 
-**Kathmandu Model College –  Kathmandu `04/2020`**<br>
-Higher Secondary: Science
+**Kathmandu Model College - Kathmandu**  
+_Higher Secondary: Science_ `04/2020`  
 
-**North Pole Boarding School – Rasuwa  `04/2016`**<br>
-School Leaving Certificate (SLC)
+**North Pole Boarding School - Rasuwa**  
+_School Leaving Certificate (SLC)_ `04/2016`  
 
-
-### CERTIFICATION
-- Certified AppSec Practitioner (CAP) - Certificate ID: 7021413 <br>
-- Certified Network Security Practitioner (CNSP) -  Certificate ID: 9721197 <br>
-- Gajabaar Infosecurity Mentorship Program - Certificate ID: GB2022001 <br>
-- National Cyber League (NCL) Spring 2022 
+### CERTIFICATIONS
+- Certified AppSec Practitioner (CAP) - ID: 7021413  
+- Certified Network Security Practitioner (CNSP) - ID: 9721197  
+- Gajabaar Infosecurity Mentorship Program - ID: GB2022001  
+- National Cyber League (NCL) Spring 2022  
 
 ### EVENT
-**Speaker at Gandaki University Internation Conference-2025**<br>
-- Talked about web attack detection and classification using LSTM
+**Speaker, Gandaki University International Conference 2025**  
+- "Web Attack Detection & Classification Using LSTM"
 
 ### ACHIEVEMENTS
-- NESS Maths Quiz 2078  - Runner-up <br>
-- SudoOverride CTF 2023 - Runner-up <br>
+- Global IME AI/ML Hackathon 2025 - Runner‑up  
+- NESS Maths Quiz 2078 - Runner‑up  
+- SudoOverride CTF 2023 - Runner‑up  
 
-### RESEARCH
-- RSA-Based Secure Communication Over HTTPS
-- Web Attack Detection and Classification Using LSTM
+### RESEARCH GRANTS & FUNDING
+- **2025:** Awarded research grant by the Research Management Unit (RMU), IOE Pashchimanchal Campus, Tribhuvan University-for "Web Attack Detection & Classification using AI/ML"
+
+### RESEARCH 
+- RSA-Based Secure Communication Over HTTPS  
+- Web Attack Detection & Classification Using LSTM  
 
 ### ECA PARTICIPATIONS
-
-- Yantra Hackathon, Pokhara Engineering College - `15 June - 16 June (2024)` <br>
-- ACES Techfest 6.0 - CTF, Purbanchal Campus (IOE) - `18 Jan (2024)` <br>
-- Locus Capture The Flag - CTF, Pulchowk Campus (IOE) - `1 Feb, 2023`  <br>
-- ACES Techfest 5.0 - CTF, Purbanchal Campus (IOE) - `13 Jan (2023)`<br>
+- Global IME AI/ML Hackathon 2025, 
+- Yantra Hackathon, Pokhara Engineering College - 15-16 June 2024  
+- ACES Techfest 6.0 CTF, Purbanchal Campus (IOE) - 18 Jan 2024  
+- Locus CTF, Pulchowk Campus (IOE) - 1 Feb 2023  
+- ACES Techfest 5.0 CTF, Purbanchal Campus (IOE) - 13 Jan 2023  
 
 ### PROJECT INVOLVEMENT
-**[TypeMobo - Typing Speed Test, Practice](https://play.google.com/store/apps/details?id=com.aaratiniraj.typemobo)**<br>
-- Mobile App for improving typing on mobile devices
+**TypeMobo - Typing Speed Test & Practice 
+[Google Play ▶](https://play.google.com/store/apps/details?id=com.aaratiniraj.typemobo)** 
+- Mobile app to improve typing skills  
 
-**[pDork - Google Dorking Tool](https://github.com/patali09/pDork)**<br>
-- Semi Automated Google Dorking Tool for Security Testing
+**pDork - Google Dorking Automation Tool 
+[GitHub ▶](https://github.com/patali09/pDork)** 
+- Semi‑automated dorking for security assessments  
 
-**[SafeConnect - Stay Connected  ](https://github.com/patali09/SafeConnect)**
-- Mobile App that supports end-to-end encryption communication
+**SafeConnect - Encrypted Mobile Messenger 
+[GitHub ▶](https://github.com/patali09/SafeConnect)** 
+- End‑to‑end encrypted communication  
 
-**[Tokma - Digital Solution for Tourism](https://github.com/patali09/Tokma)**
-- Mobile app aims to assist tourist in their travel
-
+**Tokma - Digital Tourism Assistant [GitHub ▶](https://github.com/patali09/Tokma)** 
+- Mobile app to enhance travel planning  
