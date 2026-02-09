@@ -2,7 +2,7 @@
 title: Flutter App RootBeer Root Detection Bypass
 date: 2026-02-08 14:10:00 +0800
 categories: [Android]
-tags: [Root Detection Bypass, Frida Hooking,Android App Security, App Security]
+tags: [Root Detection Bypass, Frida Hooking,Android App Security, App Security, Reverse Engineering]
 ---
 # RootBeer Root Detection Bypass in Flutter Application
 
