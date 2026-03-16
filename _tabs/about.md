@@ -23,7 +23,7 @@ Enthusiastic Computer Engineering graduate (March 2025) with a passion for Mobi
 
 ### WORK EXPERIENCE
 **Offensive Security Analyst, Cryptogen Nepal Pvt. Ltd - Kathmandu, Bagmati**  
-`05/2023 - 12/2023`  
+`May 2023 - Dec 2023, Jun 2025 - Present`  
 - Conducted comprehensive vulnerability assesement and penentration testing on mobile and web application
 - Write technical and executive reports
 - Validate security improvements with additional testing
@@ -78,13 +78,16 @@ _School Leaving Certificate (SLC)_ `04/2016`
 - ACES Techfest 5.0 CTF, Purbanchal Campus (IOE) - 13 Jan 2023  
 
 ### PROJECT INVOLVEMENT
-**TypeMobo - Typing Speed Test & Practice 
-[Google Play ▶](https://play.google.com/store/apps/details?id=com.aaratiniraj.typemobo)** 
-- Mobile app to improve typing skills  
+**Frida-Labs - Android Frida Learning Challenges [GitHub ▶](https://github.com/DERE-ad2001/Frida-Labs)**
+- Contributed challenge solutions and content for Android exploitation learning with Frida
 
 **pDork - Google Dorking Automation Tool 
 [GitHub ▶](https://github.com/patali09/pDork)** 
 - Semi‑automated dorking for security assessments  
+
+**TypeMobo - Typing Speed Test & Practice 
+[Google Play ▶](https://play.google.com/store/apps/details?id=com.aaratiniraj.typemobo)** 
+- Mobile app to improve typing skills  
 
 **SafeConnect - Encrypted Mobile Messenger 
 [GitHub ▶](https://github.com/patali09/SafeConnect)** 
