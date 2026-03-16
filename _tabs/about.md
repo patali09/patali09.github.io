@@ -78,6 +78,7 @@ _School Leaving Certificate (SLC)_ `04/2016`
 - ACES Techfest 5.0 CTF, Purbanchal Campus (IOE) - 13 Jan 2023  
 
 ### PROJECT INVOLVEMENT
+#### Security Projects
 **Frida-Labs - Android Frida Learning Challenges [GitHub ▶](https://github.com/DERE-ad2001/Frida-Labs)**
 - Contributed challenge solutions and content for Android exploitation learning with Frida
 
@@ -85,6 +86,7 @@ _School Leaving Certificate (SLC)_ `04/2016`
 [GitHub ▶](https://github.com/patali09/pDork)** 
 - Semi‑automated dorking for security assessments  
 
+#### Development Projects
 **TypeMobo - Typing Speed Test & Practice 
 [Google Play ▶](https://play.google.com/store/apps/details?id=com.aaratiniraj.typemobo)** 
 - Mobile app to improve typing skills  
