@@ -16,7 +16,7 @@ But here is the twist - it has **two modes**:
 | Mode | What It Does |
 |------|-------------|
 | **Secure Mode** | Credentials are stored in a biometric-protected encrypted vault. Your fingerprint is the key to the vault. |
-| **Bypassable Mode** | Biometric is checked, but credentials are stored as plaintext. The fingerprint is just a door handle, not a lock. |
+| **Bypassable Mode** | Biometric is checked. The fingerprint is just a door handle, not a lock. |
 
 The entire point of the app is to show developers the difference. Let us break down both.
 
@@ -113,8 +113,8 @@ Even with root access, the key itself never leaves the secure hardware. I can du
 // lib/services/insecure_auth_service.dart
 
 // During enrollment:
-await _storage.saveUsername(username);
-await _storage.savePassword(password);  // <-- plaintext password stored here
+await _storage.saveUsername(username); //under the hood FlutterSecureStorage is being used
+await _storage.savePassword(password); //under the hood FlutterSecureStorage is being used
 ```
 
 ```dart
@@ -133,7 +133,7 @@ if (didAuthenticate) {
 
 ### What Is Happening Here
 
-1. During enrollment, the password is saved to `FlutterSecureStorage` as plaintext.
+1. During enrollment, the password is saved to `FlutterSecureStorage`. On Android, this uses `EncryptedSharedPreferences` under the hood, which encrypts data using a key stored in the Android Keystore. So the password is not written as plaintext on disk - it is encrypted. However, the encryption key is tied to the **app's UID**, not to any biometric. Any code running as that app can ask the Keystore to decrypt it at any time.
 2. During login, the app checks biometrics - and if that passes, it just reads the stored password back out.
 
 The biometric here is a **UI gate only**. The password is sitting in encrypted storage, yes, but:
@@ -205,7 +205,7 @@ frida -U -f com.example.biometric_auth -l script.js
 
 5. `callback.onAuthenticationSucceeded(resultInstance)` - calls the success callback directly. The app's auth flow receives a success result as if the user had genuinely placed their finger on the sensor.
 
-The app then reads the plaintext password from storage and hands it straight back.
+The app then reads the password from `FlutterSecureStorage` and hands it straight back. The storage is encrypted, but the encryption key is not biometric-bound - it is accessible to any process running as the app's UID. The biometric was the only gate, and we just bypassed it.
 
 **Why does this work on bypassable mode but not on secure mode?**
 
