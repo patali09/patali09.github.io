@@ -5,9 +5,6 @@ categories: [Android]
 tags: [Biometric Bypass, Frida Hooking,Android App Security, App Security, Reverse Engineering]
 ---
 
-# Biometrics in Android Apps: What Could Possibly Go Wrong and How Attackers Exploit It
-
-
 ## The App: A Tale of Two Implementations
 
 The app we are looking at is called **biometric (com.example.biometric)**. It lets a user enroll with a username and password, then log in using their fingerprint. Simple enough.
