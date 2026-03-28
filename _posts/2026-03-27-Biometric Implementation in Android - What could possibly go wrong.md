@@ -1,5 +1,5 @@
 ---
-title: Biometrics in Android Apps: What Could Possibly Go Wrong and How Attackers Exploit It.
+title: "Biometrics in Android Apps: What Could Possibly Go Wrong and How Attackers Exploit It."
 date: 2026-03-27 14:10:00 +0800
 categories: [Android]
 tags: [Biometric Bypass, Frida Hooking,Android App Security, App Security, Reverse Engineering]
@@ -10,7 +10,7 @@ tags: [Biometric Bypass, Frida Hooking,Android App Security, App Security, Rever
 
 ## The App: A Tale of Two Implementations
 
-The app we are looking at is called **Biometric Auth Demo**. It lets a user enroll with a username and password, then log in using their fingerprint. Simple enough.
+The app we are looking at is called **biometric (com.example.biometric)**. It lets a user enroll with a username and password, then log in using their fingerprint. Simple enough.
 
 > The APK and source are available at [github.com/patali09/Frida-Challenges/tree/main/Biometric](https://github.com/patali09/Frida-Challenges/tree/main/Biometric)
 
