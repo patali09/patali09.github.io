@@ -1,10 +1,9 @@
 ---
-title: "Biometrics in Android Apps: What Could Possibly Go Wrong and How Attackers Exploit It."
+title: "AndroDialer - The Ultimate Phone Experience"
 date: 2026-06-10 14:10:00 +0800
 categories: [Android]
 tags: [Android Pentest, 8ksec, intent, ]
 ---
-# AndroDialer - The Ultimate Phone Experience
 
 In this challenge, `AndroDialer.apk` was provided. On installing over a device running android 16, it looks like a call app with Dialer, Contacts and Recent  feature.
 
