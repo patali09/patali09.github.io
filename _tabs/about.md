@@ -6,7 +6,7 @@ order: 4
 
 # Niraj Neupane | Mobile, Web Security Researcher
 
-**contact@neupaneniraj.com.np**  
+**neupaneniraj08@gmail.com**  
 **Kathmandu, Nepal**
 
 ### PROFESSIONAL SUMMARY
@@ -23,7 +23,7 @@ Enthusiastic Computer Engineering graduate (March 2025) with a passion for Mobi
 
 ### WORK EXPERIENCE
 **Offensive Security Analyst, Cryptogen Nepal Pvt. Ltd - Kathmandu, Bagmati**  
-`May 2023 - Dec 2023, Jun 2025 - Present`  
+`May 2022 - Dec 2023, Jun 2025 - Present`  
 - Conducted comprehensive vulnerability assesement and penentration testing on mobile and web application
 - Write technical and executive reports
 - Validate security improvements with additional testing
