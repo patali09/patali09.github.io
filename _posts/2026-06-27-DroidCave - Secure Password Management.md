@@ -7,7 +7,7 @@ tags: [8ksec, Android Pentest, Content Provider 8ksec, sql injection, IPC]
 
 # Description
 
-In the given challenge we were provided with an `DroidCave.apk` , which was basically a password manager. Our goal is to create the android application that can steal the passwords saved by this password manager exploiting sql injection and IPC mechanism.
+In the given challenge we were provided with an `DroidCave.apk` , which was basically a password manager. Our goal is to develop an Malicious Android application with an innocent appearance that can, with just one click of a seemingly normal button, steal both plaintext passwords and the decrypted form of encrypted passwords from the DroidCave database.
 
 ![Saving couple of password](/images/DroidCave/image.png)
 
