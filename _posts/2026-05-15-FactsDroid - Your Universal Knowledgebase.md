@@ -78,7 +78,7 @@ Still we do get this error.
 
 ![image.png](/images/FactsDroid/image%2011.png)
 
-Since, goal is to intercept traffic, we pasted frida script by updating IP and proxy port  in frida repl by copying from https://github.com/hackcatml/frida-flutterproxy/blob/main/script.js for patching [liabapp.so](http://liabapp.so) and redirecting traffic to our burpsuite.
+Since, goal is to intercept traffic, we pasted frida script by updating IP and proxy port  in frida repl by copying from https://github.com/hackcatml/frida-flutterproxy/blob/main/script.js for patching `libapp.so` and redirecting traffic to our burpsuite.
 
 ![image.png](/images/FactsDroid/image%2012.png)
 
