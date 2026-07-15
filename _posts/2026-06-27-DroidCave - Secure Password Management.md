@@ -10,16 +10,14 @@ tags: [8ksec, Android Pentest, Content Provider 8ksec, sql injection, IPC]
 In the given challenge we were provided with an `DroidCave.apk` , which was basically a password manager. Our goal is to develop an Malicious Android application with an innocent appearance that can, with just one click of a seemingly normal button, steal both plaintext passwords and the decrypted form of encrypted passwords from the DroidCave database.
 
 ![Saving couple of password](/images/DroidCave/image.png)
-
-Saving couple of password
+_Saving couple of password_
 
 # Analysis
 
 As very first step we open the `DroidCave.apk` in `jadx-gui` and start to look in `AndroidManifest.xml` . We get `com.eightksec.droidcave.provider.PasswordContentProvider` provider which is exported.
 
 ![Provider with Exported:true](/images/DroidCave/image%201.png)
-
-Provider with Exported:true
+_Provider with Exported:true_
 
 Looking into `com.eightksec.droidcave.provider.PasswordContentProvider` , we find out that it has `uriMatcher` things .
 
@@ -30,7 +28,6 @@ Looking into `com.eightksec.droidcave.provider.PasswordContentProvider` , we fin
 In its `Cursor query` method, it checks which of the above patterns the provider request URI matches, and executes the operation accordingly.
 
 ![image.png](/images/DroidCave/image%203.png)
-
 If we look into AppDatabase (`com.eightksec.droidcave.data.AppDatabase`), its actually creating the database file named as `droidcave_database`  if doesn't exist, but if does its returning the instance of it.
 
 ### Case 1
@@ -38,16 +35,14 @@ If we look into AppDatabase (`com.eightksec.droidcave.data.AppDatabase`), its ac
 `uriMatcher.addURI(AUTHORITY, "passwords", 1);` is the routing requirement for case 1. If provider request looks like `com.eightksec.droidcave.provider/passwords` , then it gets executed. If we don't pass the projection it will pass select every column of passwords table.
 
 ![Case 1](/images/DroidCave/image%204.png)
-
-Case 1
+_Case 1_
 
 ```jsx
 adb shell 'content query --uri "content://com.eightksec.droidcave.provider/passwords/"'
 ```
 
 ![output received on matching case 1](/images/DroidCave/image%205.png)
-
-output received on matching case 1
+_output received on matching case 1_
 
 ### Case 2 - Search Password by ID:
 
@@ -58,12 +53,10 @@ adb shell 'content query --uri "content://com.eightksec.droidcave.provider/passw
 ```
 
 ![Example of searching password of id 1](/images/DroidCave/image%206.png)
-
-Example of searching password of id 1
+_Example of searching password of id 1_
 
 ![image.png](/images/DroidCave/image%207.png)
-
-Here, URI lastPathSegment is expected to be the id of target password. Using that query is executed.
+_Here, URI lastPathSegment is expected to be the id of target password. Using that query is executed._
 
 ```jsx
 adb shell 'content query --uri "content://com.eightksec.droidcave.provider/passwords/#"'
@@ -80,48 +73,40 @@ uriMatcher.addURI(AUTHORITY, "password_search/*", 3);
 ```
 
 ![Code Execution for case 3](/images/DroidCave/image%209.png)
-
-Code Execution for case 3
+_Code Execution for case 3_
 
 ![Searching `username` keyword](/images/DroidCave/image%2010.png)
-
-Searching `username` keyword
+_Searching `username` keyword_
 
 ### Case 4:
 
 While adding password in our lab there was 3 types of category `LOGIN` , `CARD`  and `NOTE` . We can use `/password_type` route to get the result filtering with type.
 
 ![Example usage of password_type route](/images/DroidCave/image%2011.png)
-
-Example usage of password_type route
+_Example usage of password_type route_
 
 Since it is joining the user input directly with sql queries, there is no any sanitization. Here we can carry out the sql injection.
 
 ![Figuring out the total number of column.](/images/DroidCave/image%2012.png)
-
-Figuring out the total number of column.
+_Figuring out the total number of column._
 
 ```jsx
 adb shell 'content query --uri "content://com.eightksec.droidcave.provider/password_type/x'\'' UNION SELECT sql,2,3,4,5,6,7,8,9,10,11 FROM sqlite_master--"'
 ```
 
 ![Dumping all 11 column with sqlinjection](/images/DroidCave/image%2013.png)
-
-Dumping all 11 column with sqlinjection
+_Dumping all 11 column with sqlinjection_
 
 ### Case 5:
 
 ![Router to execute case 5.](/images/DroidCave/image%2014.png)
-
-Router to execute case 5.
+_Router to execute case 5._
 
 ![Code Logic of Case 5](/images/DroidCave/image%2015.png)
-
-Code Logic of Case 5
+_Code Logic of Case 5_
 
 ![Dumping everything from `passwords` table using case 5 logic.](/images/DroidCave/image%2016.png)
-
-Dumping everything from `passwords` table using case 5 logic.
+_Dumping everything from `passwords` table using case 5 logic._
 
 ### Case 6:
 
@@ -130,7 +115,6 @@ Dumping everything from `passwords` table using case 5 logic.
 ![image.png](/images/DroidCave/image%2017.png)
 
 ![image.png](/images/DroidCave/image%2018.png)
-
 Here, the route handling `/settings` is checking is uri last segments starts with `get_` , if yes then it as slicing off the `get_` part then checking if remaining part is equal to value of `KEY_ENCRYPTION_ENABLED` variable thats on SettingsViewModel. The value of `KEY_ENCRYPTION_ENABLED` is `encryption_enabled` . In overall, it is checking that if route URI looks like `/settings/get_encryption_enabled` , if yes it is reading `encryption_enabled` key value from `sharedPreferences` and returning. The returned value is stored in matrixCursor6 which is basically passed to `matrixCursor4` and returned at the end of case 6.
 
 Along with that, if route URI doesn't looks like `/settings/get_encryption_enabled` then it was checking if look like `/settings/get_all` . If it matches is reading `encryption_enabled` key value from `sharedPreferences` and returning.
@@ -140,8 +124,7 @@ Along with that, if route URI doesn't looks like `/settings/get_encryption_enabl
 #### Part 2: Updating `encryption_enabled` value in sharedPreferences
 
 ![Code logic inside else of case 6](/images/DroidCave/image%2020.png)
-
-Code logic inside else of case 6
+_Code logic inside else of case 6_
 
 In the `else` block, it checks whether `lastPathSegments` starts with `set_`. If it does, the string is split by `=`, and the first part is compared against `KEY_ENCRYPTION_ENABLED`, whose value is `encryption_enabled`. If that matches, it then compares our input with `true`. If they are equal, `zEquals` is set to `true`; otherwise, it is set to `false`. It then updates the `encryption_enabled` value in `sharedPreferences` based on the value we provided to the content provider. Along with that, it also queries the provider path to encrypt or decrypt based on the `zEquals`value.
 
@@ -157,74 +140,61 @@ In the `else` block, it checks whether `lastPathSegments` starts with `set_`. If
 ![image.png](/images/DroidCave/image%2022.png)
 
 ![Initially updating the sharedPreferences to set `encryption_enabled` to false](/images/DroidCave/image%2023.png)
-
-Initially updating the sharedPreferences to set `encryption_enabled` to false
+_Initially updating the sharedPreferences to set `encryption_enabled` to false_
 
 ![Decryption Process Logic](/images/DroidCave/image%2024.png)
-
-Decryption Process Logic
+_Decryption Process Logic_
 
 Fetching the password from those row which has `isEncrypted` is `1` in `passwords` table of database then decrypting with method `decrypt` from `encryptionService` . Updating the `isEncrypted` value to 0 and updating the password with bytes of decrypted password.
 
 If any error occur in try block, then original password is getting replaced with `password123` .
 
 ![On any error on tryblock passwords is getting set as password123](/images/DroidCave/image%2025.png)
-
-On any error on tryblock passwords is getting set as `password123`.
+_On any error on tryblock passwords is getting set as `password123`._
 
 If we lookinto decrypt function it is basically utilizing the android keystore to decrypt the password than using our master key.
 
 ![Decryption logic](/images/DroidCave/image%2026.png)
-
-Decryption logic
+_Decryption logic_
 
 ![GetSecretKey logic used in decryption logic](/images/DroidCave/image%2027.png)
-
-GetSecretKey logic used in decryption logic
+_GetSecretKey logic used in decryption logic_
 
 ### Case 8 - Password Encryption:
 
 ![Routing for case 8](/images/DroidCave/image%2028.png)
-
-Routing for case 8
+_Routing for case 8_
 
 ![PATH_ENABLE_ENCRPTION variable value](/images/DroidCave/image%2029.png)
-
-PATH_ENABLE_ENCRPTION variable value
+_PATH_ENABLE_ENCRPTION variable value_
 
 Initially they are updating the `enable_encryption` key value to true on sharedPreferences.
 
 ![image.png](/images/DroidCave/image%2030.png)
-
 Then, all the passwords with `isEncrypted` to `0` are fetched from database, then they are encrypted with `encrypt` method of `encryptionService` which basically utilized the keystore to generate a secret key and use that to encrypt the password. Then, encrypted output bytes are written back into database with `isEncrypted true` .
 
 ![Logical flow of encryption](/images/DroidCave/image%2031.png)
-
-Logical flow of encryption
+_Logical flow of encryption_
 
 ### Case 9 - Updating Password by passing in base64 format
 
 ![Case 9 Route](/images/DroidCave/image%2032.png)
-
-Case 9 Route
+_Case 9 Route_
 
 ![Logic of case 9](/images/DroidCave/image%2033.png)
-
-Logic of case 9
+_Logic of case 9_
 
 In case 9, it is expecting the URI format in `set_password_plaintext/{id}/{base64_plaintext}` , and using that to  update the password for respective id. Before updating its doing base64 decode and output blob is updated in database.
 
 ![Triggering case 9 to update password of id 1 and fetching to verify if actually updated.](/images/DroidCave/image%2034.png)
-
-Triggering case 9 to update password of id 1 and fetching to verify if actually updated.
+_Triggering case 9 to update password of id 1 and fetching to verify if actually updated._
 
 ## Insert Method
 
 Besides query, insert was performing the insertion on database
 
 ![insert code logic](/images/DroidCave/image%2035.png)
-
-insert code logic
+_insert code logic_
 
 ## Update Method
 
@@ -357,5 +327,4 @@ class MainActivity : ComponentActivity() {
 ```
 
 ![Running exploit application is triggering the decryption and showing the decrypted passwords.](/images/DroidCave/image%2038.png)
-
-Running exploit application is triggering the decryption and showing the decrypted passwords.
+_Running exploit application is triggering the decryption and showing the decrypted passwords._
