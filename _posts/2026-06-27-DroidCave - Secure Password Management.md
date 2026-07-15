@@ -2,7 +2,7 @@
 title: "DroidCave - Secure Password Management"
 date: 2026-06-27 21:20:00 +0800
 categories: [Android]
-tags: [8ksec, Android Pentest, Content Provider 8ksec, sql injection, IPC]
+tags: [8ksec, Android Pentest, Content Provider 8ksec, sql injection, IPC, Android Application Security]
 ---
 
 # Description

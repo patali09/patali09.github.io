@@ -2,14 +2,13 @@
 title: "AndroDialer - The Ultimate Phone Experience"
 date: 2026-06-10 14:10:00 +0800
 categories: [Android]
-tags: [Android Pentest, 8ksec, intent, ]
+tags: [Android Pentest, 8ksec, intent, Android Application Security ]
 ---
 
-In this challenge, `AndroDialer.apk` was provided. On installing over a device running android 16, it looks like a call app with Dialer, Contacts and Recent  feature.
+In this challenge, `AndroDialer.apk` was provided. On installing it on a device running Android 16, it looks like a call app with Dialer, Contacts, and Recent features.
 
 ![Dialer Screen of AndroDialer](/images/AndroDialer/image.png)
-
-Dialer Screen of AndroDialer
+_Dialer Screen of AndroDialer_
 
 Our Goal
 
@@ -17,32 +16,28 @@ Create a malicious application that exploits the AndroDialer application to init
 
 Analysis
 
-As first step of analysis, we opened our target app in `jadx-gui` , we get to see 
-`com.eightksec.androdialer.CallHandlerServiceActivity`  is the one activity that’s exported other than `MainActivity` and has no UI.  
+As the first step of analysis, we opened our target app in `jadx-gui`, and we see that `com.eightksec.androdialer.CallHandlerServiceActivity` is the only activity, other than `MainActivity`, that's exported and has no UI.
 
 ![`com.eightksec.androdialer.CallHandlerServiceActivity` as exported activity](/images/AndroDialer/image%201.png)
+_`com.eightksec.androdialer.CallHandlerServiceActivity` as exported activity_
 
-`com.eightksec.androdialer.CallHandlerServiceActivity` as exported activity
+Analysing the decompiled code of `com.eightksec.androdialer.CallHandlerServiceActivity`, we see that it calls `startActivity` with an intent having data `strGroup` (which is basically the phone number) and action `android.intent.action.CALL`.
 
-If we analysed `com.eightksec.androdialer.CallHandlerServiceActivity` decompiled code. It was calling startActivity with intent having data `strGroup` (which is basically phone number) and action `android.intent.action.CALL`. 
+![making call with the phone number passed in strGroup](/images/AndroDialer/image%202.png)
+_making call with the phone number passed in strGroup_
 
-![making call with the phone number passed in strGroup ](/images/AndroDialer/image%202.png)
-
-making call with the phone number passed in strGroup 
-
-To pass the phone number in `strGroup`, we should have passed `enterprise_auth_token` or `token` which can be one of `8kd1aL3R_s3Cur3_k3Y_2023` and `8kd1aL3R-s3Cur3-k3Y-2023` .
+To pass the phone number in `strGroup`, we must first pass `enterprise_auth_token` or `token`, whose value can be either `8kd1aL3R_s3Cur3_k3Y_2023` or `8kd1aL3R-s3Cur3-k3Y-2023`.
 
 ![Validating if `arraryList` has one of the hardcoded secret key among `8kd1aL3R_s3Cur3_k3Y_2023` and `8kd1aL3R-s3Cur3-k3Y-2023`.](/images/AndroDialer/image%203.png)
+_Validating if `arraryList` has one of the hardcoded secret key among `8kd1aL3R_s3Cur3_k3Y_2023` and `8kd1aL3R-s3Cur3-k3Y-2023`._
 
-Validating if `arraryList` has one of the hardcoded secret key among `8kd1aL3R_s3Cur3_k3Y_2023` and `8kd1aL3R-s3Cur3-k3Y-2023`.
+If the data (`Uri data = getIntent().getData()`) passed along with the intent satisfies the condition (`data != null && data.isHierarchical()`), then there are multiple ways of passing the `enterprise_auth_token`.
 
-if the data (`Uri data = getIntent().getData()`) passed along intent satisfies the condition(`data != null && data.isHierarchical()`)  then we have mainly multiple ways of passing the `enterprise_auth_token` . 
 Method 1:
-One is as extra along with intent . 
+One way is as an extra along with the intent.
 
 ![Parsing `enterprise_auth_token` or `token` and adding to arrayList](/images/AndroDialer/image%204.png)
-
-Parsing `enterprise_auth_token` or `token` and adding to arrayList
+_Parsing `enterprise_auth_token` or `token` and adding to arrayList_
 
 Example:
 
@@ -54,38 +49,38 @@ adb shell am start \
 ```
 
 Method 2:
-Pass it in data where data should have hierarchical structure. 
+Pass it in the data, which should have a hierarchical structure.
 Eg. `dialersec://call/?enterprise_auth_token=8kd1aL3R_s3Cur3_k3Y_2023`
 
-Method 3: 
-Pass `enterprise_auth_token` as segment after `token` maintaining data in hierarchical structure. 
+Method 3:
+Pass `enterprise_auth_token` as a segment after `token`, maintaining the data in a hierarchical structure.
 Eg. `dialersec://call/tokn/8kd1aL3R_s3Cur3_k3Y_2023`
 
-Method 4: (4 subcases in fragment itself): 
-Passing in fragment of data uri. Eg.
-`dialersec://call/?#enterprise_auth_token=8kd1aL3R_s3Cur3_k3Y_2023` 
-`dialersec://call/?#token=8kd1aL3R_s3Cur3_k3Y_2023` 
-`dialersec://call/#/!&enterprise_auth_token=8kd1aL3R_s3Cur3_k3Y_2023` 
+Method 4 (4 subcases within the fragment):
+Passing it in the fragment of the data URI. Eg.:
+`dialersec://call/?#enterprise_auth_token=8kd1aL3R_s3Cur3_k3Y_2023`
+`dialersec://call/?#token=8kd1aL3R_s3Cur3_k3Y_2023`
+`dialersec://call/#/!&enterprise_auth_token=8kd1aL3R_s3Cur3_k3Y_2023`
 `dialersec://call/#xomthing=random;S.enterprise_auth_token=8kd1aL3R_s3Cur3_k3Y_2023`
 
 Method 5:
-Passing in data uri using `;` seperator.
-`dialersec://call/test=anything;enterprise_auth_token=8kd1aL3R_s3Cur3_k3Y_2023` 
+Passing it in the data URI using a `;` separator.
+`dialersec://call/test=anything;enterprise_auth_token=8kd1aL3R_s3Cur3_k3Y_2023`
 
-After passing token, we need to pass the phone number that gets into the `strGroup` variable. Cause now array list will be `greater than 0` than the default value of `i`.
+After passing the token, we need to pass the phone number that gets into the `strGroup` variable, since the array list size will now be greater than 0, the default value of `i`.
 
 ![image.png](/images/AndroDialer/image%205.png)
 
 # Passing number into strGroup
 
-There are multiple method to pass the phone number in `strGroup` over which later call will be made.
+There are multiple methods to pass the phone number into `strGroup`, which is later used to make the call.
 
 Method 1:
-As an extra with key `phoneNumber` 
+As an extra with the key `phoneNumber`.
 
 ![image.png](/images/AndroDialer/image%206.png)
 
-Eg. 
+Eg.
 
 ```jsx
 adb shell 'am start \
@@ -97,27 +92,27 @@ adb shell 'am start \
 
 Method 2:
 
-Since `strGroup` is equal to `getSchemeSpecificPart()` ; here `getSchemeSpecificPart()`  returns anything between `schema` and segement `#`  Here in schema of data we need to pass `tel`
+Since `strGroup` is equal to `getSchemeSpecificPart()`; here, `getSchemeSpecificPart()` returns anything between the `scheme` and the segment `#`. Here, in the scheme of the data, we need to pass `tel`.
 
 ![image.png](/images/AndroDialer/image%207.png)
 
-Eg. of data of intent
+Eg. of the intent's data:
 `tel://9810234567/#/!&enterprise_auth_token=8kd1aL3R_s3Cur3_k3Y_2023`
 
 Method 3:
-If scheme of data is `dialersec` and host is call   `queryParameter` is null then from path segment its finding the index of `number` than its taking next value just next to the index of number as `strGroup` . So, overall data looks like `dialersec://call/number/9840341641#/!&enterprise_auth_token=8kd1aL3R_s3Cur3_k3Y_2023`
-Eg. 
+If the scheme of the data is `dialersec`, the host is `call`, and `queryParameter` is null, then it finds the index of `number` in the path segments and takes the next value after that index as `strGroup`. So, the overall data looks like `dialersec://call/number/9840341641#/!&enterprise_auth_token=8kd1aL3R_s3Cur3_k3Y_2023`
+Eg.
 
 ![image.png](/images/AndroDialer/image%208.png)
 
 Method 4:
-Just as [Method 3](https://app.notion.com/p/AndroDialer-The-Ultimate-Phone-Experience-3714d591802a80faab2def8503069a34?pvs=21) but parameter has not to be null in data of intent. Eg.
+Just as [Method 3](https://app.notion.com/p/AndroDialer-The-Ultimate-Phone-Experience-3714d591802a80faab2def8503069a34?pvs=21) but the `queryParameter` must not be null in the intent's data. Eg.:
 `dialersec://call/?number=9801010101#/!&enterprise_auth_token=8kd1aL3R_s3Cur3_k3Y_2023`
 
 ![image.png](/images/AndroDialer/image%209.png)
 
-Method 5 (When scheme is not equal to dialersec): 
- `dataString` is supposed to start with `tel:` and anything after that will be the value of`strGroup` Eg: 
+Method 5 (when the scheme is not equal to `dialersec`):
+`dataString` is supposed to start with `tel:`, and anything after that will be the value of `strGroup`. Eg.:
 
 ```jsx
 adb shell 'am start \
@@ -128,8 +123,8 @@ adb shell 'am start \
 
 ![image.png](/images/AndroDialer/image%2010.png)
 
-Method 6 (When scheme is not equal to dialersec):
-Here it checks for anything digital in `data` and should not have `dialersec` as scheme, any number in data will be extracted and pass to `strGroup` .
+Method 6 (when the scheme is not equal to `dialersec`):
+Here, it checks for any digits in `data`; as long as the scheme is not `dialersec`, any number found in the data will be extracted and passed to `strGroup`.
 
 ```bash
 adb shell 'am start \
@@ -140,8 +135,8 @@ adb shell 'am start \
 
 ![image.png](/images/AndroDialer/image%2011.png)
 
-Method 7: (When scheme is not equal to dialersec)
-Here we can pass in any form but we should use `;number=` before passing actual number 
+Method 7 (when the scheme is not equal to `dialersec`):
+Here, we can pass the data in any form, but we should use `;number=` before the actual number.
 
 ```jsx
 adb shell 'am start \
@@ -154,13 +149,13 @@ adb shell 'am start \
 
 # Final Execution
 
-If we able to pass number into `strGroup` bypassing any one of the check we have listed above. Then, `strGroup` will get pass and activity with `android.intent.action.CALL` action will start the activity with  `FLAG_ACTIVITY_NEW_TASK` flag, which will be handled by app that makes the call.
+If we are able to pass a number into `strGroup` by bypassing any one of the checks listed above, then `strGroup` gets set, and the activity with the `android.intent.action.CALL` action starts with the `FLAG_ACTIVITY_NEW_TASK` flag, which is handled by the app that makes the call.
 
 ![image.png](/images/AndroDialer/image%2013.png)
 
 # Mobile Application code
 
-Since exploit app can be implemented in so many ways, we took the following case as baseline.
+Since the exploit app can be implemented in so many ways, we took the following case as a baseline.
 
 ```jsx
 adb shell 'am start \
@@ -170,7 +165,7 @@ adb shell 'am start \
 ```
 
 Source Code:
-Fill the phone number, click on Dial, trigger the intent and make call. 
+Fill in the phone number and click Dial, which triggers the intent and makes the call.
 
 ```jsx
 package com.nirajneupane08.androdialer

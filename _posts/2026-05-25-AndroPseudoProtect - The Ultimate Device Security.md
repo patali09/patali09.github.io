@@ -8,30 +8,26 @@ tags: [Android Pentest, 8ksec, broadcast receiver, exported service, IPC]
 After installing the app on our Android 16 device, we see a `Start Security` button that encrypts files on external storage. Our goal is to silently disable this encryption and read the decrypted files.
 
 ![Landing page of AndroPseudoProtect apk.](/images/AndroPseudoProtect/image.png)
-
-Landing page of AndroPseudoProtect apk.
+_Landing page of AndroPseudoProtect apk._
 
 As the first step of our analysis, we opened the target application in `jadx-gui` and inspected `AndroidManifest.xml`. At a glance, we noticed that the `com.eightksec.andropseudoprotect.SecurityService` service and the `om.eightksec.andropseudoprotect.SecurityReceiver` receiver are exported.
 
 ![Exported service and receiver in AndroidManifest.xml](/images/AndroPseudoProtect/image%201.png)
-
-Exported service and receiver in AndroidManifest.xml
+_Exported service and receiver in AndroidManifest.xml_
 
 Looking into the receiver, it crafts an intent to trigger the service based on the received intent. If we trigger the receiver with certain flags and values, it crafts the intent and starts the service.
 
 ![Crafting intent and starting service with that intent.](/images/AndroPseudoProtect/image%202.png)
-
-Crafting intent and starting service with that intent. 
+_Crafting intent and starting service with that intent._
 
 Next, in the `com.eightksec.andropseudoprotect.SecurityService"` service, it validates the `security_token` against the return value of `getSecurityToken`, then branches based on the action, either to `startSecurity()` or `stopSecurity()`.
 
-![SecurityService validating extras and tokens and deciding weather to start or stop security.](/images/AndroPseudoProtect/image%203.png)
-
-SecurityService validating extras and tokens and deciding weather to start or stop security. 
+![SecurityService validating extras and tokens and deciding whether to start or stop security.](/images/AndroPseudoProtect/image%203.png)
+_SecurityService validating extras and tokens and deciding whether to start or stop security._
 
 Here, `startSecurity()` encrypts the files on storage, and `stopSecurity()` decrypts those same files.
 
-Since the receiver responsible for triggering the service is exported, any app can start it. The challenge was passing the token without hardcoding it. To do that, we used `createPackageContext` to create an instance of the `SecurityUtils` class and invoke the `getSecurityToken` method from within our own app.
+Since the receiver responsible for triggering the service is exported, any app can start it. The challenge was to pass the token without hardcoding it. To do that, we used `createPackageContext` to create an instance of the `SecurityUtils` class and invoke the `getSecurityToken` method from within our own app.
 
 ```jsx
 fun getToken(context: Context): String? {
@@ -65,8 +61,7 @@ sendBroadcast(stopIntent)
 ```
 
 ![Silently decrypting and stealing the files.](/images/AndroPseudoProtect/image%204.png)
-
-Silently decrypting and stealing the files.
+_Silently decrypting and stealing the files._
 
 This way, we manage to decrypt and list the files by exploiting the exported broadcast, using dnd mode, and the `createPackageContext` API.
 
