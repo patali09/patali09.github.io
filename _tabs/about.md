@@ -49,6 +49,7 @@ _Higher Secondary: Science_ `04/2020`
 _School Leaving Certificate (SLC)_ `04/2016`  
 
 ### CERTIFICATIONS
+- Certified LLM Security Expert (CLLMSE) - ID: 2d6ec2d1e62e7212
 - Certified AppSec Practitioner (CAP) - ID: 7021413  
 - Certified Network Security Practitioner (CNSP) - ID: 9721197  
 - Gajabaar Infosecurity Mentorship Program - ID: GB2022001  
